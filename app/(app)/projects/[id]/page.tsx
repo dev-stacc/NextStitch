@@ -110,9 +110,7 @@ export default function ProjectDetailPage() {
     try {
       await projectsApi.remove(id)
       router.push('/projects')
-    } catch {
-      /* keep user on page */
-    }
+    } catch {}
   }
 
   function openEdit() {

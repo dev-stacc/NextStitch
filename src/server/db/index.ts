@@ -30,8 +30,6 @@ export function getStore(): DataStore {
   return g[globalKey]!
 }
 
-// Test-only: force the singleton to a fresh memory-backed store.
-// Handlers stay untouched — they just see a clean DataStore per test.
 export function resetStoreForTests(): DataStore {
   const g = globalThis as WithStore
   const fresh = buildMemoryStore()

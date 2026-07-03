@@ -17,9 +17,8 @@ export default auth((req) => {
   }
 })
 
+// SSE event stream is excluded — middleware wrapping breaks streaming responses.
 export const config = {
-  // Everything except Next internals, static assets, the auth handler routes,
-  // and the SSE event stream (SSE + middleware fight over the response body).
   matcher: [
     '/((?!_next/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$|api/auth|api/projects/\\d+/events).*)',
   ],

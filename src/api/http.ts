@@ -13,9 +13,7 @@ async function parseError(res: Response): Promise<string> {
   try {
     const data = (await res.clone().json()) as { detail?: string }
     if (data.detail) return data.detail
-  } catch {
-    // fall through
-  }
+  } catch {}
   return `Error ${res.status}`
 }
 

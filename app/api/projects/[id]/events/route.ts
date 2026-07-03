@@ -28,9 +28,7 @@ export async function GET(req: NextRequest, ctx: Params) {
         unsubscribe()
         try {
           controller.close()
-        } catch {
-          /* already closed */
-        }
+        } catch {}
       }
       req.signal.addEventListener('abort', close)
     },

@@ -78,7 +78,7 @@ export class NeonChecklist implements ChecklistRepo {
 
   async reorder(projectId: number, ids: number[]): Promise<boolean> {
     if (ids.length === 0) return true
-    // Neon HTTP driver: run updates in parallel (each is a single statement).
+    // Neon HTTP driver has no cross-statement transactions.
     await Promise.all(
       ids.map((id, position) =>
         this.db

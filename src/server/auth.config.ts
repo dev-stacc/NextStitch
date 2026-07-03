@@ -1,8 +1,6 @@
 import type { NextAuthConfig } from 'next-auth'
 
-// Edge-safe subset of the auth config. The middleware runs on the edge runtime
-// and can't pull in the Drizzle adapter or bcryptjs, so we split those into
-// `auth.ts` and keep only the providers-agnostic shell here.
+// Edge-safe subset — middleware can't import Drizzle or bcryptjs.
 export const authConfig = {
   session: { strategy: 'jwt' },
   pages: { signIn: '/login' },

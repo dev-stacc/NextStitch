@@ -18,10 +18,9 @@ import type {
   UpsertMeasurementSetInput,
 } from '@/src/models'
 
-// Every project- or global-set method takes the current user's id. Ownership
-// is enforced at the repo boundary: unknown projects for that user return null.
-// Child resources (patterns/materials/checklist/…) don't take userId — the
-// route handler must resolve the project first via projects.get(userId, id).
+// Ownership is enforced at the boundary: project + global-set methods take
+// userId; child resources rely on the handler calling projects.get(userId, id)
+// first via requireProjectAccess().
 
 export interface ProjectsRepo {
   list(userId: string): Promise<Project[]>

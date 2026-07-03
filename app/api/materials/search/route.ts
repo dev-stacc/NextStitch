@@ -7,8 +7,7 @@ interface Body {
   source: string
 }
 
-// TODO(stub): replace with real fabric-store scrapers (fabricville, tonitex,
-// spool_of_thread, fine_fabrics_canada, the_fabric_club, cleanersupply).
+// TODO(stub): replace with real fabric-store scrapers.
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as Body
   if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')

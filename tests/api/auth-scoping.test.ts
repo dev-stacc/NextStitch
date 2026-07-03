@@ -85,21 +85,17 @@ describe('auth scoping', () => {
 
   it('global measurement sets are scoped per user', async () => {
     setTestUserIdForTests(TEST_USER_ID)
-    const aliceSet = (await (
-      await createGlobal(
-        jsonRequest('/api/measurements', {
-          method: 'POST',
-          body: { name: 'Alice', measurements: {} },
-        }),
-      )
-    ).json()) as MeasurementSet
+    await createGlobal(
+      jsonRequest('/api/measurements', {
+        method: 'POST',
+        body: { name: 'Alice', measurements: {} },
+      }),
+    )
 
     setTestUserIdForTests(OTHER_USER_ID)
     const bobList = (await (await listGlobal()).json()) as MeasurementSet[]
     expect(bobList).toEqual([])
 
-    // And ensure Bob can't fetch alice's project detail via her set id either.
-    void aliceSet
     setTestUserIdForTests(TEST_USER_ID)
     const aliceList = (await (await listGlobal()).json()) as MeasurementSet[]
     expect(aliceList.map((s) => s.name)).toEqual(['Alice'])

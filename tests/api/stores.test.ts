@@ -13,7 +13,7 @@ interface OverpassPayload {
 }
 
 function mockOverpass(payload: OverpassPayload) {
-  return vi.fn(async (input: RequestInfo | URL) => {
+  return vi.fn<typeof fetch>(async (input) => {
     const url = typeof input === 'string' ? input : input.toString()
     if (!url.startsWith(OVERPASS_URL)) {
       throw new Error(`Unexpected fetch: ${url}`)
@@ -63,8 +63,7 @@ describe('stores/nearby (Overpass)', () => {
             tags: { name: 'Threadbare', phone: undefined, website: undefined },
           },
           {
-            // Element without lat/lon is dropped.
-            tags: { name: 'ghost' },
+            tags: { name: 'ghost-without-coords' },
           },
         ],
       }),

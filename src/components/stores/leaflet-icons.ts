@@ -8,7 +8,6 @@ let configured = false
 export function configureLeafletIcons(): void {
   if (configured) return
   configured = true
-  // Merge default icon URLs so bundlers resolve the assets from the leaflet package.
   const proto = L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown }
   delete proto._getIconUrl
   L.Icon.Default.mergeOptions({

@@ -1,27 +1,28 @@
-import { NextRequest } from 'next/server'
-import type { PatternSearchHit, PatternSource } from '@/src/models'
+import { NextRequest, NextResponse } from 'next/server'
+import type { PatternSource } from '@/src/models'
+import { requireUser } from '@/src/server/auth-helpers'
 import { badRequest, json } from '@/src/server/http'
+import { getPatternScraper } from '@/src/server/services/patterns'
 
 interface Body {
   query: string
   source: PatternSource
 }
 
-// TODO(stub): replace with real per-source pattern scrapers (simplicity, mood,
-// black_snail, truly_victorian, laughing_moon) matching the FastAPI backend.
 export async function POST(req: NextRequest) {
+  const userId = await requireUser()
+  if (userId instanceof NextResponse) return userId
+
   const body = (await req.json()) as Body
   if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')
 
-  const q = body.query.trim()
-  const hits: PatternSearchHit[] = Array.from({ length: 3 }).map((_, i) => ({
-    source: body.source,
-    title: `${q} — ${body.source.replace(/_/g, ' ')} #${i + 1}`,
-    url: `https://example.com/${body.source}/${encodeURIComponent(q)}/${i + 1}`,
-    image_url: `https://picsum.photos/seed/${body.source}-${i}/240/240`,
-    price: `$${(9.99 + i * 4).toFixed(2)}`,
-    pattern_number: `${body.source.slice(0, 2).toUpperCase()}-${1000 + i}`,
-  }))
+  const scraper = getPatternScraper(body.source)
+  if (!scraper) return json([])
 
-  return json(hits)
+  try {
+    const hits = await scraper.search(body.query.trim())
+    return json(hits)
+  } catch {
+    return json([])
+  }
 }
