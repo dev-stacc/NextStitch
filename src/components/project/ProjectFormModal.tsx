@@ -111,7 +111,9 @@ export default function ProjectFormModal(props: ProjectFormModalProps) {
         </form>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button type="submit">close</button>
+        <button type="submit" aria-label="Close">
+          <span className="sr-only">Close</span>
+        </button>
       </form>
     </dialog>
   )

@@ -27,5 +27,4 @@ export function compressImage(
   })
 }
 
-export const PDF_THUMB_SIZE = 48
-export const PDF_THUMB_SCALE = PDF_THUMB_SIZE / 816
+export const PDF_THUMB_SCALE = 48 / 816

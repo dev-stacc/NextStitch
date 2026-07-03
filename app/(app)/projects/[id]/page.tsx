@@ -5,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { measurementsApi, patternsApi, projectsApi } from '@/src/api'
 import type { Material, MeasurementSet, Pattern, ProjectStatus } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
-import Spinner from '@/src/components/ui/Spinner'
 import MeasurementSetModal from '@/src/components/measurement/MeasurementSetModal'
 import ChecklistSection from '@/src/components/project/ChecklistSection'
 import EditMaterialModal from '@/src/components/project/EditMaterialModal'
@@ -59,8 +58,14 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-16">
-        <Spinner size="lg" />
+      <div className="flex flex-col gap-4 w-full">
+        <div className="h-8 w-64 bg-base-300 rounded animate-pulse" />
+        <div className="h-4 w-96 bg-base-300 rounded animate-pulse" />
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:flex-1">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="h-40 bg-base-200 rounded-xl animate-pulse" />
+          ))}
+        </div>
       </div>
     )
   }

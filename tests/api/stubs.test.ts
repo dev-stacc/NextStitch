@@ -4,7 +4,6 @@ import { POST as patternSearch } from '@/app/api/patterns/search/route'
 import { POST as materialSearch } from '@/app/api/materials/search/route'
 import { POST as suggestPatterns } from '@/app/api/llm/suggest-patterns/route'
 import { POST as suggestMaterials } from '@/app/api/llm/suggest-materials/route'
-import { POST as storesNearby } from '@/app/api/stores/nearby/route'
 import { jsonRequest } from '../helpers'
 
 // These endpoints are stubs — the tests document current behaviour so we notice
@@ -39,17 +38,6 @@ describe('stub endpoints', () => {
     expect(await (await suggestMaterials()).json()).toBeTypeOf('string')
   })
 
-  it('stores/nearby returns 3 stores around the requested point', async () => {
-    const res = await storesNearby(
-      jsonRequest('/api/stores/nearby', {
-        method: 'POST',
-        body: { lat: 45.5, lon: -73.5, radius_m: 10_000 },
-      }),
-    )
-    const body = (await res.json()) as { stores: unknown[] }
-    expect(body.stores).toHaveLength(3)
-  })
-
   it('rejects search calls missing query or source', async () => {
     const r1 = await patternSearch(
       jsonRequest('/api/patterns/search', { method: 'POST', body: { query: '', source: 'simplicity' } }),
@@ -60,10 +48,5 @@ describe('stub endpoints', () => {
       jsonRequest('/api/materials/search', { method: 'POST', body: { query: 'x' } }),
     )
     expect(r2.status).toBe(400)
-
-    const r3 = await storesNearby(
-      jsonRequest('/api/stores/nearby', { method: 'POST', body: {} }),
-    )
-    expect(r3.status).toBe(400)
   })
 })

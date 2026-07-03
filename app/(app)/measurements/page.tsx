@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Ruler } from 'lucide-react'
 import { measurementsApi } from '@/src/api'
 import type { MeasurementSet } from '@/src/models'
 import Spinner from '@/src/components/ui/Spinner'
@@ -53,9 +54,19 @@ export default function MyMeasurementsPage() {
               <Spinner size="lg" />
             </div>
           ) : sets.length === 0 ? (
-            <p className="text-base-content/40 text-sm px-2 py-8 text-center">
-              No measurement sets yet. Add one to get started.
-            </p>
+            <div className="flex flex-col items-center gap-3 py-12 text-center">
+              <Ruler className="w-10 h-10 text-base-content/30" />
+              <p className="text-base-content/60">
+                Save your measurements once — reuse them across projects.
+              </p>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm"
+                onClick={() => router.push('/measurements/add')}
+              >
+                + Add your first set
+              </button>
+            </div>
           ) : (
             <div className="flex flex-col gap-1 overflow-y-auto">
               {sets.map((ms) => (

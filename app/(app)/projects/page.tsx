@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { FolderPlus } from 'lucide-react'
 import { measurementsApi, projectsApi } from '@/src/api'
 import type { MeasurementSet, Project } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
@@ -125,7 +126,23 @@ export default function ProjectsPage() {
       )}
       {error && <Alert>{error}</Alert>}
       {!loading && !error && filtered.length === 0 && (
-        <p className="text-base-content/50 text-center py-16">No projects found.</p>
+        <div className="flex flex-col items-center gap-3 py-16 text-center">
+          <FolderPlus className="w-10 h-10 text-base-content/30" />
+          <p className="text-base-content/60">
+            {projects.length === 0
+              ? 'No projects yet — start one to plan your next make.'
+              : 'No projects match your filters.'}
+          </p>
+          {projects.length === 0 ? (
+            <button type="button" className="btn btn-primary btn-sm" onClick={openCreate}>
+              + Create your first project
+            </button>
+          ) : (
+            <button type="button" className="btn btn-ghost btn-sm" onClick={clearFilters}>
+              Clear filters
+            </button>
+          )}
+        </div>
       )}
       {!loading && !error && filtered.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

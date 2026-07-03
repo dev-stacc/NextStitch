@@ -19,14 +19,23 @@ export default function LoginForm() {
     e.preventDefault()
     setLoading(true)
     setError(null)
-    const res = await signIn('credentials', { email, password, redirect: false })
-    setLoading(false)
-    if (res?.error) {
-      setError('Wrong email or password.')
-      return
+    try {
+      const res = await signIn('credentials', { email, password, redirect: false })
+      if (res?.error === 'CredentialsSignin') {
+        setError('Wrong email or password.')
+        return
+      }
+      if (res?.error) {
+        setError('Sign-in failed. Please try again.')
+        return
+      }
+      router.push(callbackUrl)
+      router.refresh()
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
     }
-    router.push(callbackUrl)
-    router.refresh()
   }
 
   return (

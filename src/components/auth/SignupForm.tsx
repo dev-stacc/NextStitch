@@ -64,16 +64,21 @@ export default function SignupForm() {
         />
       </label>
       <label className="form-control">
-        <span className="label-text">Password (min 8 characters)</span>
+        <span className="label-text">Password</span>
         <input
           type="password"
-          className="input input-bordered w-full"
+          className={`input input-bordered w-full ${password.length > 0 && password.length < 8 ? 'input-warning' : ''}`}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           minLength={8}
           required
           autoComplete="new-password"
         />
+        <span
+          className={`label-text-alt mt-1 ${password.length >= 8 ? 'text-success' : 'text-base-content/50'}`}
+        >
+          {password.length >= 8 ? '✓ Strong enough' : 'At least 8 characters'}
+        </span>
       </label>
       <button
         type="submit"

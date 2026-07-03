@@ -2,29 +2,48 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { FolderOpen, MapPin, Ruler } from 'lucide-react'
 import { projectsApi } from '@/src/api'
 import type { Project } from '@/src/models'
 
 export default function LandingPage() {
+  const { data: session } = useSession()
   const [recent, setRecent] = useState<Project | null>(null)
+  const [hasAny, setHasAny] = useState<boolean | null>(null)
 
   useEffect(() => {
     projectsApi
       .list()
       .then((data) => {
+        setHasAny(data.length > 0)
         if (data.length === 0) return
         const sorted = [...data].sort(
           (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
         )
         setRecent(sorted[0])
       })
-      .catch(() => {})
+      .catch(() => setHasAny(false))
   }, [])
+
+  const firstName = session?.user?.name?.split(' ')[0]
+  const greeting =
+    hasAny === false
+      ? firstName
+        ? `Welcome, ${firstName}`
+        : 'Welcome'
+      : firstName
+        ? `Welcome back, ${firstName}`
+        : 'Welcome back'
 
   return (
     <div className="flex flex-col gap-6 max-w-xl">
-      <h1 className="text-2xl font-semibold">Welcome Back</h1>
+      <h1 className="text-2xl font-semibold">{greeting}</h1>
+      {hasAny === false && (
+        <p className="text-base-content/60 -mt-2">
+          Start by creating your first project or saving your measurements.
+        </p>
+      )}
 
       <div className="flex flex-col gap-3">
         {recent && (
