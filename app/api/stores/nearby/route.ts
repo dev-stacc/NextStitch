@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server'
 import type { FabricStore, NearbyStoresRequest, NearbyStoresResponse } from '@/src/domain'
 import { badRequest, json } from '@/src/server/http'
 
+// TODO(stub): replace with real Overpass API query for OSM fabric/sewing shops
+// within radius_m of (lat, lon), matching the FastAPI store_finder service.
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as NearbyStoresRequest
   if (typeof body?.lat !== 'number' || typeof body?.lon !== 'number') {

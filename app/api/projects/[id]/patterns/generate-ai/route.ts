@@ -18,7 +18,8 @@ export async function POST(req: NextRequest, ctx: Params) {
   const body = (await req.json()) as Body
   if (!body?.prompt?.trim()) return badRequest('prompt is required')
 
-  // Dummy: create a placeholder "generated" pattern with a data-url PDF stub.
+  // TODO(stub): wire to real Claude-driven pattern generator + PDF renderer.
+  // For now, create a placeholder "generated" pattern with a data-url PDF stub.
   const pdfStub =
     'data:application/pdf;base64,JVBERi0xLjQKJcOkw7zDtsOfCjEgMCBvYmoKPDwKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCnRyYWlsZXIKPDwKL1Jvb3QgMSAwIFIKPj4KJSVFT0Y='
 

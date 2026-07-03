@@ -7,6 +7,8 @@ interface Body {
   source: PatternSource
 }
 
+// TODO(stub): replace with real per-source pattern scrapers (simplicity, mood,
+// black_snail, truly_victorian, laughing_moon) matching the FastAPI backend.
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as Body
   if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')
