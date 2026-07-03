@@ -1,4 +1,4 @@
-import type { Project } from '@/src/domain'
+import type { Project } from '@/src/models'
 import type { SortDir, SortField, StatusFilter } from '@/src/components/project/ProjectFilters'
 
 export function filterAndSort(

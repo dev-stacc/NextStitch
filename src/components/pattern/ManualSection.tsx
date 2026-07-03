@@ -1,7 +1,7 @@
 'use client'
 
 import { type FormEvent, useState } from 'react'
-import type { CreatePatternInput, Pattern } from '@/src/domain'
+import type { CreatePatternInput, Pattern } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Pencil, Trash2 } from 'lucide-react'
-import type { ProjectDetail, ProjectStatus } from '@/src/domain'
+import type { ProjectDetail, ProjectStatus } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 import { fmtDate, fmtMoney } from '@/src/lib/format'
 import { materialsSpent, patternsSpent } from '@/src/lib/project-totals'

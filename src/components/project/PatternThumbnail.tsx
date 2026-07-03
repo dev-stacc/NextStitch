@@ -1,6 +1,6 @@
 'use client'
 
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import { PDF_THUMB_SCALE } from '@/src/lib/image'
 
 interface Props {

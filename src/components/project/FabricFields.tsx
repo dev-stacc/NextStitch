@@ -1,6 +1,6 @@
 'use client'
 
-import type { GrainDirection } from '@/src/domain'
+import type { GrainDirection } from '@/src/models'
 import { GRAIN_DIRECTION_OPTIONS, GRAIN_LABELS } from '@/src/lib/constants'
 
 export interface FabricFieldValues {

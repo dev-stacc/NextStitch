@@ -4,7 +4,7 @@ import type {
   ProjectDetail,
   ProjectStatus,
   UpdateProjectInput,
-} from '@/src/domain'
+} from '@/src/models'
 import { requestJson, requestVoid } from './http'
 
 export interface ProjectsApi {

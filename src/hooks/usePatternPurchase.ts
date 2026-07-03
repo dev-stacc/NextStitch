@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { patternsApi } from '@/src/api'
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 
 interface Return {
   pending: Pattern | null

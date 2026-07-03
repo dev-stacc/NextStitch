@@ -1,38 +1,46 @@
-import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/domain'
+import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/models'
 import type { MeasurementSetsRepo } from './types'
 import { DbState, nextId } from './state'
 
 export class MemoryMeasurementSets implements MeasurementSetsRepo {
   constructor(private readonly state: DbState) {}
 
-  async listGlobal(): Promise<MeasurementSet[]> {
+  async listGlobal(userId: string): Promise<MeasurementSet[]> {
     return Array.from(this.state.globalSets.values())
+      .filter((row) => row.ownerId === userId)
+      .map((row) => row.ms)
   }
 
-  async createGlobal(input: UpsertMeasurementSetInput): Promise<MeasurementSet> {
+  async createGlobal(
+    userId: string,
+    input: UpsertMeasurementSetInput,
+  ): Promise<MeasurementSet> {
     const ms: MeasurementSet = {
       id: nextId(),
       name: input.name,
       measurements: { ...input.measurements },
     }
-    this.state.globalSets.set(ms.id, ms)
+    this.state.globalSets.set(ms.id, { ownerId: userId, ms })
     return ms
   }
 
   async updateGlobal(
+    userId: string,
     msId: number,
     input: UpsertMeasurementSetInput,
   ): Promise<MeasurementSet | null> {
-    const existing = this.state.globalSets.get(msId)
-    if (!existing) return null
-    existing.name = input.name
-    existing.measurements = { ...input.measurements }
-    return existing
+    const row = this.state.globalSets.get(msId)
+    if (!row || row.ownerId !== userId) return null
+    row.ms.name = input.name
+    row.ms.measurements = { ...input.measurements }
+    return row.ms
   }
 
-  async removeGlobal(msId: number): Promise<boolean> {
-    for (const row of this.state.projects.values()) {
-      row.globalMeasurementSetIds.delete(msId)
+  async removeGlobal(userId: string, msId: number): Promise<boolean> {
+    const row = this.state.globalSets.get(msId)
+    if (!row || row.ownerId !== userId) return false
+    for (const project of this.state.projects.values()) {
+      project.globalMeasurementSetIds.delete(msId)
     }
     return this.state.globalSets.delete(msId)
   }

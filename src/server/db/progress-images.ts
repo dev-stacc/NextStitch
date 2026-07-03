@@ -1,4 +1,4 @@
-import type { ProjectImage } from '@/src/domain'
+import type { ProjectImage } from '@/src/models'
 import type { ProgressImagesRepo } from './types'
 import { DbState, nextId } from './state'
 

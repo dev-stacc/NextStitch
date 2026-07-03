@@ -1,4 +1,4 @@
-import type { Material, Pattern } from '@/src/domain'
+import type { Material, Pattern } from '@/src/models'
 
 export function materialsSpent(materials: readonly Material[]): number {
   return materials.reduce(

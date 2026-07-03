@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { llmApi, materialsApi } from '@/src/api'
-import type { CreateMaterialInput, Material, MaterialSearchHit } from '@/src/domain'
+import type { CreateMaterialInput, Material, MaterialSearchHit } from '@/src/models'
 import Spinner from '@/src/components/ui/Spinner'
 import { MATERIAL_SOURCES } from '@/src/lib/constants'
 import MaterialSearchResultRow from './MaterialSearchResultRow'

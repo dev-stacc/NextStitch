@@ -2,7 +2,7 @@
 
 import { Eye } from 'lucide-react'
 import DeleteButton from '@/src/components/ui/DeleteButton'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 
 interface Props {
   ms: MeasurementSet

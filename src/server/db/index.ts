@@ -6,8 +6,9 @@ import { MemoryMaterials } from './materials'
 import { MemoryChecklist } from './checklist'
 import { MemoryMeasurementSets } from './measurement-sets'
 import { MemoryProgressImages } from './progress-images'
+import { buildNeonStore } from './neon'
 
-function build(): DataStore {
+function buildMemoryStore(): DataStore {
   const state = new DbState()
   return {
     projects: new MemoryProjects(state),
@@ -24,8 +25,18 @@ type WithStore = typeof globalThis & { [key: symbol]: DataStore | undefined }
 
 export function getStore(): DataStore {
   const g = globalThis as WithStore
-  if (!g[globalKey]) g[globalKey] = build()
+  if (g[globalKey]) return g[globalKey]!
+  g[globalKey] = process.env.DATABASE_URL ? buildNeonStore() : buildMemoryStore()
   return g[globalKey]!
+}
+
+// Test-only: force the singleton to a fresh memory-backed store.
+// Handlers stay untouched — they just see a clean DataStore per test.
+export function resetStoreForTests(): DataStore {
+  const g = globalThis as WithStore
+  const fresh = buildMemoryStore()
+  g[globalKey] = fresh
+  return fresh
 }
 
 export type { DataStore } from './types'

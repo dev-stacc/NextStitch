@@ -1,4 +1,4 @@
-import type { NearbyStoresRequest, NearbyStoresResponse } from '@/src/domain'
+import type { NearbyStoresRequest, NearbyStoresResponse } from '@/src/models'
 import { requestJson } from './http'
 
 export interface StoresApi {

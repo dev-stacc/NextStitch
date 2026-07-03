@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { patternsApi } from '@/src/api'
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import Modal from '@/src/components/ui/Modal'
 import ModalHeader from '@/src/components/ui/ModalHeader'
 import Spinner from '@/src/components/ui/Spinner'

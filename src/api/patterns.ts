@@ -4,7 +4,7 @@ import type {
   PatternSearchHit,
   PatternSource,
   UpdatePatternInput,
-} from '@/src/domain'
+} from '@/src/models'
 import { requestForm, requestJson, requestVoid } from './http'
 
 export interface PatternUploadInput {

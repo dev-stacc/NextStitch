@@ -1,6 +1,6 @@
 'use client'
 
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import Modal from '@/src/components/ui/Modal'
 
 interface Props {

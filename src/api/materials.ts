@@ -3,7 +3,7 @@ import type {
   Material,
   MaterialSearchHit,
   UpdateMaterialInput,
-} from '@/src/domain'
+} from '@/src/models'
 import { requestForm, requestJson, requestVoid } from './http'
 
 export interface UploadedImage {

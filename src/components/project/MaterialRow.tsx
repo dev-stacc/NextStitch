@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Eye, Package } from 'lucide-react'
 import { materialsApi } from '@/src/api'
-import type { Material } from '@/src/domain'
+import type { Material } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
 import { extractSourceUrl } from '@/src/lib/material-url'

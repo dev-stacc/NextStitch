@@ -1,5 +1,5 @@
 import { Clock, Globe, MapPin, Phone } from 'lucide-react'
-import type { FabricStore } from '@/src/domain'
+import type { FabricStore } from '@/src/models'
 
 interface Props {
   store: FabricStore

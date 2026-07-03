@@ -1,7 +1,7 @@
 'use client'
 
 import { type FormEvent, type RefObject } from 'react'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 import GlobalMeasurementSetsPicker from './GlobalMeasurementSetsPicker'

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { materialsApi } from '@/src/api'
-import type { Material } from '@/src/domain'
+import type { Material } from '@/src/models'
 
 interface Return {
   pending: Material | null

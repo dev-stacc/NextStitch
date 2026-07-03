@@ -5,9 +5,10 @@ import type {
   Pattern,
   Project,
   ProjectImage,
-} from '@/src/domain'
+} from '@/src/models'
 
 export interface ProjectRow {
+  ownerId: string
   project: Project
   patterns: Pattern[]
   materials: Material[]
@@ -17,9 +18,14 @@ export interface ProjectRow {
   progressImages: ProjectImage[]
 }
 
+export interface GlobalSetRow {
+  ownerId: string
+  ms: MeasurementSet
+}
+
 export class DbState {
   readonly projects = new Map<number, ProjectRow>()
-  readonly globalSets = new Map<number, MeasurementSet>()
+  readonly globalSets = new Map<number, GlobalSetRow>()
 }
 
 export function nextId(): number {

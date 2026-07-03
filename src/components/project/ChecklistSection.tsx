@@ -15,7 +15,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { checklistApi } from '@/src/api'
-import type { ChecklistItem } from '@/src/domain'
+import type { ChecklistItem } from '@/src/models'
 import Spinner from '@/src/components/ui/Spinner'
 import ChecklistItemModal from './ChecklistItemModal'
 import SortableChecklistItem from './SortableChecklistItem'

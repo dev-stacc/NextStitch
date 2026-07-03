@@ -1,6 +1,6 @@
 'use client'
 
-import type { MaterialSearchHit } from '@/src/domain'
+import type { MaterialSearchHit } from '@/src/models'
 import Spinner from '@/src/components/ui/Spinner'
 
 interface Props {

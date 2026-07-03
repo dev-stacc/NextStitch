@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { Package } from 'lucide-react'
-import type { Material } from '@/src/domain'
+import type { Material } from '@/src/models'
 import Modal from '@/src/components/ui/Modal'
 import { extractSourceUrl } from '@/src/lib/material-url'
 

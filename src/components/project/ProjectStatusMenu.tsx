@@ -1,6 +1,6 @@
 'use client'
 
-import type { ProjectStatus } from '@/src/domain'
+import type { ProjectStatus } from '@/src/models'
 import { STATUS_OPTIONS } from '@/src/lib/constants'
 
 interface Props {

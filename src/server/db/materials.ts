@@ -1,4 +1,4 @@
-import type { CreateMaterialInput, Material, UpdateMaterialInput } from '@/src/domain'
+import type { CreateMaterialInput, Material, UpdateMaterialInput } from '@/src/models'
 import type { MaterialsRepo } from './types'
 import { DbState, nextId } from './state'
 

@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { materialsApi } from '@/src/api'
-import type { CreateMaterialInput, GrainDirection, Material } from '@/src/domain'
+import type { CreateMaterialInput, GrainDirection, Material } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 import { GRAIN_DIRECTION_OPTIONS } from '@/src/lib/constants'

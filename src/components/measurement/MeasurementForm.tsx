@@ -2,7 +2,7 @@
 
 import { type FormEvent, useEffect, useState } from 'react'
 import { Check } from 'lucide-react'
-import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/domain'
+import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 import { useMeasurementForm } from '@/src/hooks/useMeasurementForm'

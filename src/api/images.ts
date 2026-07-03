@@ -1,4 +1,4 @@
-import type { ProjectImage } from '@/src/domain'
+import type { ProjectImage } from '@/src/models'
 import { requestForm, requestVoid } from './http'
 
 export interface ProgressImagesApi {

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { useBreadcrumb } from '@/src/contexts/BreadcrumbContext'
 import { buildCrumbs } from './breadcrumbs'
+import UserMenu from './UserMenu'
 
 interface NavbarProps {
   onToggleSidebar: () => void
@@ -26,7 +27,7 @@ export default function Navbar({ onToggleSidebar }: NavbarProps) {
         <Menu className="h-5 w-5" />
       </button>
 
-      <div className="breadcrumbs text-sm">
+      <div className="breadcrumbs text-sm flex-1 min-w-0">
         <ul>
           <li>
             <span className="text-base-content/50">Sewing Assistant</span>
@@ -41,6 +42,8 @@ export default function Navbar({ onToggleSidebar }: NavbarProps) {
           })}
         </ul>
       </div>
+
+      <UserMenu />
     </nav>
   )
 }

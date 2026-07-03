@@ -1,4 +1,4 @@
-import type { CreatePatternInput, Pattern, UpdatePatternInput } from '@/src/domain'
+import type { CreatePatternInput, Pattern, UpdatePatternInput } from '@/src/models'
 import type { PatternsRepo } from './types'
 import { DbState, nextId } from './state'
 

@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import type { FabricStore } from '@/src/domain'
+import type { FabricStore } from '@/src/models'
 import { configureLeafletIcons } from './leaflet-icons'
 
 interface Props {

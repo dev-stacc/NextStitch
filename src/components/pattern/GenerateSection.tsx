@@ -2,7 +2,7 @@
 
 import { type FormEvent, useEffect, useState } from 'react'
 import { patternsApi, projectsApi } from '@/src/api'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 

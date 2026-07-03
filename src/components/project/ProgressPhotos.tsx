@@ -2,7 +2,7 @@
 
 import { type ChangeEvent, useEffect, useState } from 'react'
 import { progressImagesApi } from '@/src/api'
-import type { ProjectImage } from '@/src/domain'
+import type { ProjectImage } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
 import Spinner from '@/src/components/ui/Spinner'

@@ -2,7 +2,7 @@ import type {
   ChecklistItem,
   CreateChecklistItemInput,
   UpdateChecklistItemInput,
-} from '@/src/domain'
+} from '@/src/models'
 import { requestForm, requestJson, requestVoid } from './http'
 import type { UploadedImage } from './materials'
 

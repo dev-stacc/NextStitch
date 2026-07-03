@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 import { MEASUREMENTS } from '@/src/lib/constants'
-import type { MeasurementValues } from '@/src/domain'
+import type { MeasurementValues } from '@/src/models'
 import type { MeasurementFormState } from '@/src/components/measurement/MeasurementFields'
 
 function emptyState(): MeasurementFormState {

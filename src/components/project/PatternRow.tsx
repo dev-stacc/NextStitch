@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Eye } from 'lucide-react'
 import { patternsApi } from '@/src/api'
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 import PatternModal from './PatternModal'
 import PatternThumbnail, { patternIsUpload } from './PatternThumbnail'

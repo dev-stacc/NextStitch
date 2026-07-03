@@ -16,15 +16,20 @@ import type {
   UpdatePatternInput,
   UpdateProjectInput,
   UpsertMeasurementSetInput,
-} from '@/src/domain'
+} from '@/src/models'
+
+// Every project- or global-set method takes the current user's id. Ownership
+// is enforced at the repo boundary: unknown projects for that user return null.
+// Child resources (patterns/materials/checklist/…) don't take userId — the
+// route handler must resolve the project first via projects.get(userId, id).
 
 export interface ProjectsRepo {
-  list(): Promise<Project[]>
-  get(id: number): Promise<ProjectDetail | null>
-  create(input: CreateProjectInput): Promise<Project>
-  update(id: number, input: UpdateProjectInput): Promise<Project | null>
-  setStatus(id: number, status: ProjectStatus): Promise<boolean>
-  remove(id: number): Promise<boolean>
+  list(userId: string): Promise<Project[]>
+  get(userId: string, id: number): Promise<ProjectDetail | null>
+  create(userId: string, input: CreateProjectInput): Promise<Project>
+  update(userId: string, id: number, input: UpdateProjectInput): Promise<Project | null>
+  setStatus(userId: string, id: number, status: ProjectStatus): Promise<boolean>
+  remove(userId: string, id: number): Promise<boolean>
 }
 
 export interface PatternsRepo {
@@ -53,10 +58,14 @@ export interface ChecklistRepo {
 }
 
 export interface MeasurementSetsRepo {
-  listGlobal(): Promise<MeasurementSet[]>
-  createGlobal(input: UpsertMeasurementSetInput): Promise<MeasurementSet>
-  updateGlobal(msId: number, input: UpsertMeasurementSetInput): Promise<MeasurementSet | null>
-  removeGlobal(msId: number): Promise<boolean>
+  listGlobal(userId: string): Promise<MeasurementSet[]>
+  createGlobal(userId: string, input: UpsertMeasurementSetInput): Promise<MeasurementSet>
+  updateGlobal(
+    userId: string,
+    msId: number,
+    input: UpsertMeasurementSetInput,
+  ): Promise<MeasurementSet | null>
+  removeGlobal(userId: string, msId: number): Promise<boolean>
 
   listForProject(projectId: number): Promise<MeasurementSet[]>
   createForProject(

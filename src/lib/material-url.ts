@@ -1,4 +1,4 @@
-import type { Material } from '@/src/domain'
+import type { Material } from '@/src/models'
 
 export function extractSourceUrl(notes: string | null | undefined): string | null {
   const m = notes?.match(/https?:\/\/[^\s]+/)

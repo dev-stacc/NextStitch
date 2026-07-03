@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { projectsApi } from '@/src/api'
-import type { ProjectDetail } from '@/src/domain'
+import type { ProjectDetail } from '@/src/models'
 import { useProjectEvents } from './useProjectEvents'
 
 interface State {

@@ -16,6 +16,10 @@ export function badRequest(detail = 'Bad request'): NextResponse {
   return NextResponse.json({ detail }, { status: 400 })
 }
 
+export function unauthorized(detail = 'Unauthorized'): NextResponse {
+  return NextResponse.json({ detail }, { status: 401 })
+}
+
 export function parseIntParam(value: string | undefined): number | null {
   if (value == null) return null
   const n = Number(value)

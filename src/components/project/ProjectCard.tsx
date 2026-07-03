@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { Project } from '@/src/domain'
+import type { Project } from '@/src/models'
 import { fmtDate, fmtMoney } from '@/src/lib/format'
 import ProjectStatusDot from './ProjectStatusDot'
 

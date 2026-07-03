@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { llmApi, patternsApi } from '@/src/api'
-import type { CreatePatternInput, Pattern, PatternSearchHit } from '@/src/domain'
+import type { CreatePatternInput, Pattern, PatternSearchHit } from '@/src/models'
 import Spinner from '@/src/components/ui/Spinner'
 import { PATTERN_SOURCES } from '@/src/lib/constants'
 import PatternSearchResultRow from './PatternSearchResultRow'

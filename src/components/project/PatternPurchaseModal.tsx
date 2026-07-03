@@ -1,7 +1,7 @@
 'use client'
 
 import { type FormEvent, useState } from 'react'
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import Modal from '@/src/components/ui/Modal'
 import PatternThumbnail from './PatternThumbnail'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 import { MEASUREMENTS } from '@/src/lib/constants'
 import Modal from '@/src/components/ui/Modal'
 import ModalHeader from '@/src/components/ui/ModalHeader'

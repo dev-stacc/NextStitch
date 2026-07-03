@@ -1,6 +1,6 @@
 'use client'
 
-import type { Material } from '@/src/domain'
+import type { Material } from '@/src/models'
 import MaterialRow from './MaterialRow'
 import SectionCard from './SectionCard'
 import { materialsSpent } from '@/src/lib/project-totals'

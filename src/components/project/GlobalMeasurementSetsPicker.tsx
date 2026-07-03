@@ -1,6 +1,6 @@
 'use client'
 
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 
 interface Props {
   sets: MeasurementSet[]

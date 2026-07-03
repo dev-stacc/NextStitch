@@ -2,7 +2,7 @@ import type {
   ChecklistItem,
   CreateChecklistItemInput,
   UpdateChecklistItemInput,
-} from '@/src/domain'
+} from '@/src/models'
 import type { ChecklistRepo } from './types'
 import { DbState, nextId } from './state'
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Eye } from 'lucide-react'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 
 interface PreviewInput extends MeasurementSet {

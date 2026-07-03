@@ -1,4 +1,4 @@
-import type { ProjectStatus, PatternSource, GrainDirection } from '@/src/domain'
+import type { ProjectStatus, PatternSource, GrainDirection } from '@/src/models'
 
 export const MEASUREMENTS: ReadonlyArray<readonly [string, string]> = [
   ['ankle', 'Ankle circumference'],

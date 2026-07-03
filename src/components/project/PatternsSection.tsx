@@ -1,6 +1,6 @@
 'use client'
 
-import type { Pattern } from '@/src/domain'
+import type { Pattern } from '@/src/models'
 import PatternRow from './PatternRow'
 import SectionCard from './SectionCard'
 import { patternsSpent } from '@/src/lib/project-totals'

@@ -1,4 +1,4 @@
-import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/domain'
+import type { MeasurementSet, UpsertMeasurementSetInput } from '@/src/models'
 import { requestJson, requestVoid } from './http'
 
 export interface MeasurementsApi {

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Eye, GripVertical } from 'lucide-react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import type { ChecklistItem } from '@/src/domain'
+import type { ChecklistItem } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
 import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
 

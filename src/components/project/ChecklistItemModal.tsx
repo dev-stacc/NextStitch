@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from 'react'
 import { checklistApi } from '@/src/api'
-import type { ChecklistItem } from '@/src/domain'
+import type { ChecklistItem } from '@/src/models'
 import Modal from '@/src/components/ui/Modal'
 import ModalHeader from '@/src/components/ui/ModalHeader'
 import Spinner from '@/src/components/ui/Spinner'

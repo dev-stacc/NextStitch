@@ -1,7 +1,7 @@
 'use client'
 
 import Spinner from '@/src/components/ui/Spinner'
-import type { PatternSearchHit } from '@/src/domain'
+import type { PatternSearchHit } from '@/src/models'
 
 interface Props {
   hit: PatternSearchHit

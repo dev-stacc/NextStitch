@@ -4,21 +4,31 @@ import type {
   ProjectDetail,
   ProjectStatus,
   UpdateProjectInput,
-} from '@/src/domain'
+} from '@/src/models'
 import type { ProjectsRepo } from './types'
 import { DbState, ProjectRow, nextId, toProjectSummary } from './state'
 
 export class MemoryProjects implements ProjectsRepo {
   constructor(private readonly state: DbState) {}
 
-  async list(): Promise<Project[]> {
-    return Array.from(this.state.projects.values()).map(toProjectSummary)
+  private ownedRow(userId: string, id: number): ProjectRow | null {
+    const row = this.state.projects.get(id)
+    if (!row || row.ownerId !== userId) return null
+    return row
   }
 
-  async get(id: number): Promise<ProjectDetail | null> {
-    const row = this.state.projects.get(id)
+  async list(userId: string): Promise<Project[]> {
+    return Array.from(this.state.projects.values())
+      .filter((r) => r.ownerId === userId)
+      .map(toProjectSummary)
+  }
+
+  async get(userId: string, id: number): Promise<ProjectDetail | null> {
+    const row = this.ownedRow(userId, id)
     if (!row) return null
     const globals = Array.from(this.state.globalSets.values())
+      .filter((g) => g.ownerId === userId)
+      .map((g) => g.ms)
     return {
       ...toProjectSummary(row),
       patterns: [...row.patterns],
@@ -30,7 +40,7 @@ export class MemoryProjects implements ProjectsRepo {
     }
   }
 
-  async create(input: CreateProjectInput): Promise<Project> {
+  async create(userId: string, input: CreateProjectInput): Promise<Project> {
     const id = nextId()
     const project: Project = {
       id,
@@ -42,6 +52,7 @@ export class MemoryProjects implements ProjectsRepo {
       total_spent: 0,
     }
     const row: ProjectRow = {
+      ownerId: userId,
       project,
       patterns: [],
       materials: [],
@@ -54,8 +65,8 @@ export class MemoryProjects implements ProjectsRepo {
     return { ...project }
   }
 
-  async update(id: number, input: UpdateProjectInput): Promise<Project | null> {
-    const row = this.state.projects.get(id)
+  async update(userId: string, id: number, input: UpdateProjectInput): Promise<Project | null> {
+    const row = this.ownedRow(userId, id)
     if (!row) return null
     if (input.name !== undefined) row.project.name = input.name
     if (input.description !== undefined) row.project.description = input.description
@@ -63,14 +74,15 @@ export class MemoryProjects implements ProjectsRepo {
     return toProjectSummary(row)
   }
 
-  async setStatus(id: number, status: ProjectStatus): Promise<boolean> {
-    const row = this.state.projects.get(id)
+  async setStatus(userId: string, id: number, status: ProjectStatus): Promise<boolean> {
+    const row = this.ownedRow(userId, id)
     if (!row) return false
     row.project.status = status
     return true
   }
 
-  async remove(id: number): Promise<boolean> {
+  async remove(userId: string, id: number): Promise<boolean> {
+    if (!this.ownedRow(userId, id)) return false
     return this.state.projects.delete(id)
   }
 }
