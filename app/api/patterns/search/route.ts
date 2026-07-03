@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import type { PatternSearchHit, PatternSource } from '@/src/domain'
+import type { PatternSearchHit, PatternSource } from '@/src/models'
 import { badRequest, json } from '@/src/server/http'
 
 interface Body {

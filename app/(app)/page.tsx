@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FolderOpen, MapPin, Ruler } from 'lucide-react'
 import { projectsApi } from '@/src/api'
-import type { Project } from '@/src/domain'
+import type { Project } from '@/src/models'
 
 export default function LandingPage() {
   const [recent, setRecent] = useState<Project | null>(null)

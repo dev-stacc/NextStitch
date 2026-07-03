@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import type { MaterialSearchHit } from '@/src/domain'
+import type { MaterialSearchHit } from '@/src/models'
 import { badRequest, json } from '@/src/server/http'
 
 interface Body {

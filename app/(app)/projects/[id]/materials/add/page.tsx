@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { materialsApi, projectsApi } from '@/src/api'
-import type { CreateMaterialInput } from '@/src/domain'
+import type { CreateMaterialInput } from '@/src/models'
 import Tabs from '@/src/components/ui/Tabs'
 import ManualSection from '@/src/components/material/ManualSection'
 import SearchSection from '@/src/components/material/SearchSection'

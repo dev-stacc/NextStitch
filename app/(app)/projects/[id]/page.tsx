@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { measurementsApi, patternsApi, projectsApi } from '@/src/api'
-import type { Material, MeasurementSet, Pattern, ProjectStatus } from '@/src/domain'
+import type { Material, MeasurementSet, Pattern, ProjectStatus } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 import MeasurementSetModal from '@/src/components/measurement/MeasurementSetModal'

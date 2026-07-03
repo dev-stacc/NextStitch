@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { patternsApi, projectsApi } from '@/src/api'
-import type { CreatePatternInput } from '@/src/domain'
+import type { CreatePatternInput } from '@/src/models'
 import Tabs from '@/src/components/ui/Tabs'
 import GenerateSection from '@/src/components/pattern/GenerateSection'
 import ManualSection from '@/src/components/pattern/ManualSection'

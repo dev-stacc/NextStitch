@@ -3,7 +3,7 @@
 import { type FormEvent, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { storesApi } from '@/src/api'
-import type { FabricStore } from '@/src/domain'
+import type { FabricStore } from '@/src/models'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 import StoreCard from '@/src/components/stores/StoreCard'

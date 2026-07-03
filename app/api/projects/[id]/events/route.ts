@@ -1,13 +1,14 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { parseIntParam } from '@/src/server/http'
 
 type Params = { params: Promise<{ id: string }> }
 
-export async function GET(_req: NextRequest, ctx: Params) {
+export async function GET(req: NextRequest, ctx: Params) {
   const { id } = await ctx.params
-  const projectId = parseIntParam(id)
-  if (projectId == null) return new Response('not found', { status: 404 })
+  const access = await requireProjectAccess(id)
+  if (access instanceof NextResponse) return access
+  const projectId = access.projectId
 
   const encoder = new TextEncoder()
   const bus = getEventBus()
@@ -25,9 +26,13 @@ export async function GET(_req: NextRequest, ctx: Params) {
       const close = () => {
         clearInterval(ping)
         unsubscribe()
-        try { controller.close() } catch { /* already closed */ }
+        try {
+          controller.close()
+        } catch {
+          /* already closed */
+        }
       }
-      _req.signal.addEventListener('abort', close)
+      req.signal.addEventListener('abort', close)
     },
   })
 

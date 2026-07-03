@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import type { FabricStore, NearbyStoresRequest, NearbyStoresResponse } from '@/src/domain'
+import type { FabricStore, NearbyStoresRequest, NearbyStoresResponse } from '@/src/models'
 import { badRequest, json } from '@/src/server/http'
 
 // TODO(stub): replace with real Overpass API query for OSM fabric/sewing shops

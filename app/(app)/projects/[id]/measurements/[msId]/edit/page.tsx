@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { measurementsApi } from '@/src/api'
-import type { MeasurementSet } from '@/src/domain'
+import type { MeasurementSet } from '@/src/models'
 import MeasurementForm from '@/src/components/measurement/MeasurementForm'
 import MeasurementPageShell from '@/src/components/measurement/MeasurementPageShell'
 import Spinner from '@/src/components/ui/Spinner'

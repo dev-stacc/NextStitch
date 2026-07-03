@@ -1,18 +1,19 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getStore } from '@/src/server/db'
+import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { badRequest, noContent, notFound, parseIntParam } from '@/src/server/http'
+import { badRequest, noContent, notFound } from '@/src/server/http'
 
 type Params = { params: Promise<{ id: string }> }
 
 export async function PATCH(req: NextRequest, ctx: Params) {
   const { id } = await ctx.params
-  const projectId = parseIntParam(id)
-  if (projectId == null) return notFound()
+  const access = await requireProjectAccess(id)
+  if (access instanceof NextResponse) return access
   const body = (await req.json()) as { ids?: number[] }
   if (!Array.isArray(body?.ids)) return badRequest('ids array required')
-  const ok = await getStore().checklist.reorder(projectId, body.ids)
+  const ok = await getStore().checklist.reorder(access.projectId, body.ids)
   if (!ok) return notFound()
-  getEventBus().notify(projectId)
+  getEventBus().notify(access.projectId)
   return noContent()
 }
