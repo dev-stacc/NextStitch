@@ -3,7 +3,7 @@ import { getStore } from '@/src/server/db'
 import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
 import { badRequest, json, notFound } from '@/src/server/http'
-import { fileToDataUrl } from '@/src/server/uploads'
+import { fileToDataUrl, validateImage } from '@/src/server/uploads'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -14,6 +14,8 @@ export async function POST(req: NextRequest, ctx: Params) {
   const form = await req.formData()
   const file = form.get('file')
   if (!(file instanceof File)) return badRequest('file is required')
+  const check = validateImage(file)
+  if (!check.ok) return badRequest(check.error)
   const url = await fileToDataUrl(file)
   const img = await getStore().progressImages.add(access.projectId, url)
   if (!img) return notFound()
