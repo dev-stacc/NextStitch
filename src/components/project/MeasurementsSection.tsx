@@ -35,7 +35,7 @@ export default function MeasurementsSection({
           + Add
         </Link>
       </div>
-      <div>
+      <div className="md:max-h-64 md:overflow-y-auto">
         {empty ? (
           <p className="text-base-content/40 text-sm px-2">No measurements added yet.</p>
         ) : (

@@ -38,7 +38,7 @@ export default function AddPatternPage() {
   const goBack = () => router.push(`/projects/${id}`)
 
   return (
-    <div className="flex flex-col md:h-full gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between shrink-0">
         <h1 className="text-2xl font-semibold">Add Pattern</h1>
         <button type="button" className="btn btn-ghost btn-sm" onClick={goBack}>

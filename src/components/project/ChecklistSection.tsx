@@ -134,7 +134,7 @@ export default function ChecklistSection({ projectId, initialItems }: Props) {
             {adding ? <Spinner size="xs" /> : 'Add'}
           </button>
         </form>
-        <div>
+        <div className="md:max-h-64 md:overflow-y-auto">
           {items.length > 0 ? (
             <DndContext
               sensors={sensors}

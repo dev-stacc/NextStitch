@@ -31,7 +31,7 @@ export default function MyMeasurementsPage() {
     <>
       {preview && <MeasurementSetModal ms={preview} onClose={() => setPreview(null)} />}
 
-      <div className="flex flex-col md:h-full gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between shrink-0">
           <h1 className="text-2xl font-semibold">Saved measurements</h1>
           <div className="flex gap-2">

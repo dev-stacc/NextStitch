@@ -40,7 +40,7 @@ export default function StoresPage() {
   }
 
   return (
-    <div className="flex flex-col md:h-full gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between shrink-0">
         <h1 className="text-2xl font-semibold">Find Fabric Stores</h1>
       </div>

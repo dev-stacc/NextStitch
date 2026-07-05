@@ -22,7 +22,7 @@ export default function SectionCard({ title, addHref, subtitle, children }: Prop
           </Link>
         )}
       </div>
-      <div className="mt-2">{children}</div>
+      <div className="mt-2 md:max-h-64 md:overflow-y-auto">{children}</div>
     </div>
   )
 }
