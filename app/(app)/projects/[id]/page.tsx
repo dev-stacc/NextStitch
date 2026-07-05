@@ -61,7 +61,7 @@ export default function ProjectDetailPage() {
       <div className="flex flex-col gap-4 w-full">
         <div className="h-8 w-64 bg-base-300 rounded animate-pulse" />
         <div className="h-4 w-96 bg-base-300 rounded animate-pulse" />
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="h-40 bg-base-200 rounded-xl animate-pulse" />
           ))}
@@ -212,7 +212,7 @@ export default function ProjectDetailPage() {
         onSubmit={handleUpdate}
       />
 
-      <div className="flex flex-col md:h-full gap-4 w-full">
+      <div className="flex flex-col gap-4 w-full">
         <ProjectHeader
           project={project}
           onEdit={openEdit}
@@ -220,7 +220,7 @@ export default function ProjectDetailPage() {
           onStatusChange={handleStatusChange}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:flex-1 md:min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <PatternsSection
             projectId={id}
             patterns={project.patterns}

@@ -76,7 +76,7 @@ export default function ProgressPhotos({ projectId, initialImages }: Props) {
       </div>
       <div className="flex-1 min-h-0 flex items-stretch overflow-x-auto gap-3 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
         {images.length === 0 && !uploading && (
-          <p className="text-base-content/40 text-sm self-center justify-between">No progress photos yet.</p>
+          <p className="text-base-content/40 text-sm self-center">No progress photos yet.</p>
         )}
         {images.map((img, i) => (
           <div

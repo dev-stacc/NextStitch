@@ -21,23 +21,23 @@ export default function ProjectHeader({ project, onEdit, onDelete, onStatusChang
 
   return (
     <div className="shrink-0 w-full">
-      <div className="flex items-center justify-between mb-2">
-        <h1 className="text-2xl font-semibold">{project.name}</h1>
-        <div className="flex gap-2">
+      <div className="flex items-center justify-between gap-3 mb-2">
+        <h1 className="text-2xl font-semibold truncate max-w-[75%]">{project.name}</h1>
+        <div className="flex gap-2 shrink-0">
           <button type="button" className="btn btn-ghost btn-sm" onClick={onEdit}>
-            <Pencil className="w-4 h-4" /> Edit project
+            <Pencil className="w-4 h-4" /> <span className="hidden lg:inline">Edit project</span>
           </button>
           <DeleteButton size="btn-sm" onConfirm={onDelete}>
-            <Trash2 className="w-4 h-4" /> Delete project
+            <Trash2 className="w-4 h-4" /> <span className="hidden lg:inline">Delete project</span>
           </DeleteButton>
           <Link href="/projects" className="btn btn-ghost btn-sm">
-            ← Back
+            ← <span className="hidden lg:inline">Back</span>
           </Link>
         </div>
       </div>
 
       {project.description && (
-        <p className="text-base-content/70">{project.description}</p>
+        <p className="text-base-content/70 line-clamp-2">{project.description}</p>
       )}
 
       <div className="flex flex-wrap gap-x-3 gap-y-1 w-full items-center justify-between mt-2 text-sm text-base-content/50">

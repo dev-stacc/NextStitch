@@ -28,14 +28,14 @@ export default function MeasurementsSection({
 }: Props) {
   const empty = globalSets.length === 0 && projectSets.length === 0
   return (
-    <div className="bg-base-200 rounded-xl p-4 flex flex-col md:min-h-0 md:overflow-hidden">
+    <div className="bg-base-200 rounded-xl p-4 flex flex-col">
       <div className="flex items-center justify-between mb-3 shrink-0">
         <h2 className="text-lg font-medium">Measurements</h2>
         <Link href={`/projects/${projectId}/measurements/add`} className="btn btn-primary btn-sm">
           + Add
         </Link>
       </div>
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div>
         {empty ? (
           <p className="text-base-content/40 text-sm px-2">No measurements added yet.</p>
         ) : (

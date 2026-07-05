@@ -109,7 +109,7 @@ export default function ChecklistSection({ projectId, initialItems }: Props) {
           }}
         />
       )}
-      <div className="flex flex-col md:flex-1 md:min-h-0">
+      <div className="flex flex-col">
         <div className="flex items-center justify-between mb-3 shrink-0">
           <h2 className="text-lg font-medium">Checklist</h2>
           {items.length > 0 && (
@@ -134,7 +134,7 @@ export default function ChecklistSection({ projectId, initialItems }: Props) {
             {adding ? <Spinner size="xs" /> : 'Add'}
           </button>
         </form>
-        <div className="md:flex-1 md:min-h-0 overflow-y-auto">
+        <div>
           {items.length > 0 ? (
             <DndContext
               sensors={sensors}

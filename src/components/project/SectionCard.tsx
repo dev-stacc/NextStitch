@@ -10,7 +10,7 @@ interface Props {
 
 export default function SectionCard({ title, addHref, subtitle, children }: Props) {
   return (
-    <div className="bg-base-200 rounded-xl p-4 flex flex-col md:min-h-0 md:overflow-hidden">
+    <div className="bg-base-200 rounded-xl p-4 flex flex-col">
       <div className="flex items-center justify-between mb-1 shrink-0">
         <div>
           <h2 className="text-lg font-medium">{title}</h2>
@@ -22,7 +22,7 @@ export default function SectionCard({ title, addHref, subtitle, children }: Prop
           </Link>
         )}
       </div>
-      <div className="flex-1 min-h-0 overflow-y-auto mt-2">{children}</div>
+      <div className="mt-2">{children}</div>
     </div>
   )
 }

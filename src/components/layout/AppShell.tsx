@@ -16,7 +16,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <Navbar onToggleSidebar={() => setSidebarOpen((o) => !o)} />
         <div className="flex flex-1 overflow-hidden">
           <Sidebar open={sidebarOpen} />
-          <main className="flex-1 p-4 md:p-6 pb-20 md:pb-6 flex flex-col overflow-y-auto md:overflow-hidden">
+          <main className="flex-1 p-4 md:p-6 pb-20 md:pb-6 flex flex-col overflow-y-auto">
             {children}
           </main>
         </div>
