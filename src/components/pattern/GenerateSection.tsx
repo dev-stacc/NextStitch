@@ -117,7 +117,7 @@ export default function GenerateSection({ projectId, onDone }: Props) {
             />
           </label>
 
-          {error && <Alert>{error}</Alert>}
+          {error && <Alert className="text-sm">{error}</Alert>}
 
           <button
             type="submit"

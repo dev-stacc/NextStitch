@@ -32,6 +32,7 @@ export default function EditGlobalMeasurementSetPage() {
           isEdit
           initial={initial}
           submitAfterMode="navigate"
+          namePlaceholder="e.g. My measurements"
           onSubmit={async (input) => {
             await measurementsApi.updateGlobal(msId, input)
             router.push('/measurements')

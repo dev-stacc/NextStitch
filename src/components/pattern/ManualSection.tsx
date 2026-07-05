@@ -68,9 +68,9 @@ export default function ManualSection({ onSave, onDone }: Props) {
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
-        <label className="form-control">
+        <div className="form-control">
           <span className="label-text font-medium">Price</span>
-          <span className="input input-bordered w-full flex items-center gap-2">
+          <label className="input input-bordered w-full flex items-center gap-2">
             <span className="text-base-content/40 text-sm select-none">$</span>
             <input
               type="number"
@@ -81,11 +81,11 @@ export default function ManualSection({ onSave, onDone }: Props) {
               min="0"
               step="0.01"
             />
-          </span>
-        </label>
-        <label className="form-control">
+          </label>
+        </div>
+        <div className="form-control">
           <span className="label-text font-medium">Price paid</span>
-          <span className="input input-bordered w-full flex items-center gap-2">
+          <label className="input input-bordered w-full flex items-center gap-2">
             <span className="text-base-content/40 text-sm select-none">$</span>
             <input
               type="number"
@@ -96,8 +96,8 @@ export default function ManualSection({ onSave, onDone }: Props) {
               min="0"
               step="0.01"
             />
-          </span>
-        </label>
+          </label>
+        </div>
         <label className="form-control">
           <span className="label-text font-medium">Notes</span>
           <textarea

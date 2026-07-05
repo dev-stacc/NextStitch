@@ -55,8 +55,7 @@ export default function MaterialRow({
           checked={isPurchased}
           onChange={() => onTogglePurchase(material, isPurchased ? 0 : 1)}
         />
-        <button
-          type="button"
+        <div
           className="w-12 h-12 flex-none rounded overflow-hidden bg-base-200 border border-base-300 cursor-pointer"
           onClick={() => material.image_url && setViewingImage(true)}
         >
@@ -68,7 +67,7 @@ export default function MaterialRow({
               <Package className="w-5 h-5" />
             </div>
           )}
-        </button>
+        </div>
         <div className="flex-1 min-w-0">
           {url ? (
             <a

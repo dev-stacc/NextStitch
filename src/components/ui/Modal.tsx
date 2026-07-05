@@ -20,7 +20,10 @@ export default function Modal({
       className={`fixed inset-0 z-50 flex items-center justify-center ${className}`}
       onClick={onClose}
     >
-      <div className={contentClassName} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`relative ${contentClassName}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>

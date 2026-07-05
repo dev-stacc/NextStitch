@@ -11,6 +11,7 @@ export default function AddGlobalMeasurementSetPage() {
         isEdit={false}
         initial={null}
         submitAfterMode="reset"
+        namePlaceholder="e.g. My measurements"
         onSubmit={(input) => measurementsApi.createGlobal(input).then(() => {})}
       />
     </MeasurementPageShell>

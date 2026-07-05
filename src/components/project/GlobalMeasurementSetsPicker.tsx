@@ -11,8 +11,10 @@ interface Props {
 export default function GlobalMeasurementSetsPicker({ sets, selected, onChange }: Props) {
   if (sets.length === 0) return null
   return (
-    <fieldset className="form-control">
-      <legend className="label-text font-medium">Include your measurements</legend>
+    <div className="form-control">
+      <label className="label">
+        <span className="label-text font-medium">Include your measurements</span>
+      </label>
       <div className="flex flex-col gap-1 max-h-36 overflow-y-auto">
         {sets.map((gs) => (
           <label key={gs.id} className="flex items-center gap-2 cursor-pointer py-1">
@@ -33,6 +35,6 @@ export default function GlobalMeasurementSetsPicker({ sets, selected, onChange }
           </label>
         ))}
       </div>
-    </fieldset>
+    </div>
   )
 }

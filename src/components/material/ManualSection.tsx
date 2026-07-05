@@ -98,11 +98,11 @@ export default function ManualSection({ projectId, onSave, onDone }: Props) {
             required
           />
         </label>
-        <label className="form-control">
+        <div className="form-control">
           <span className="label-text font-medium">
             Price <span className="text-error">*</span>
           </span>
-          <span className="input input-bordered w-full flex items-center gap-2">
+          <label className="input input-bordered w-full flex items-center gap-2">
             <span className="text-base-content/40 text-sm select-none">$</span>
             <input
               type="number"
@@ -114,8 +114,8 @@ export default function ManualSection({ projectId, onSave, onDone }: Props) {
               step="0.01"
               required
             />
-          </span>
-        </label>
+          </label>
+        </div>
         <div className="form-control">
           <span className="label-text font-medium">Image</span>
           {imagePreview ? (

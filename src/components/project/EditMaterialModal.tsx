@@ -156,7 +156,7 @@ export default function EditMaterialModal({ material, projectId, onSaved, onClos
             {isView ? (
               <p className="text-sm px-1">{price ? `$${Number(price).toFixed(2)}` : '—'}</p>
             ) : (
-              <span className="input input-bordered input-sm w-full flex items-center gap-2">
+              <label className="input input-bordered input-sm w-full flex items-center gap-2">
                 <span className="text-base-content/40 text-sm select-none">$</span>
                 <input
                   type="number"
@@ -167,7 +167,7 @@ export default function EditMaterialModal({ material, projectId, onSaved, onClos
                   min="0"
                   step="0.01"
                 />
-              </span>
+              </label>
             )}
           </div>
 

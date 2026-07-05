@@ -152,7 +152,7 @@ function FieldPricePaid({
           )}
         </p>
       ) : (
-        <span className="input input-bordered input-sm w-full flex items-center gap-2">
+        <label className="input input-bordered input-sm w-full flex items-center gap-2">
           <span className="text-base-content/40 text-sm select-none">$</span>
           <input
             type="number"
@@ -163,7 +163,7 @@ function FieldPricePaid({
             min="0"
             step="0.01"
           />
-        </span>
+        </label>
       )}
     </div>
   )

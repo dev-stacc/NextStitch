@@ -81,9 +81,9 @@ export default function ProjectFormModal(props: ProjectFormModalProps) {
             />
           </label>
 
-          <label className="form-control">
+          <div className="form-control">
             <span className="label-text font-medium">Budget</span>
-            <span className="input input-bordered w-full flex items-center gap-2">
+            <label className="input input-bordered w-full flex items-center gap-2">
               <span className="text-base-content/40 text-sm select-none">$</span>
               <input
                 type="number"
@@ -94,8 +94,8 @@ export default function ProjectFormModal(props: ProjectFormModalProps) {
                 min="0"
                 step="0.01"
               />
-            </span>
-          </label>
+            </label>
+          </div>
 
           {!isEdit && selectedGlobalSets && setSelectedGlobalSets && (
             <GlobalMeasurementSetsPicker

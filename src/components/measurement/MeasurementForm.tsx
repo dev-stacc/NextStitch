@@ -13,18 +13,26 @@ interface Props {
   initial: MeasurementSet | null
   onSubmit: (input: UpsertMeasurementSetInput) => Promise<void>
   submitAfterMode: 'reset' | 'navigate'
+  namePlaceholder?: string
 }
 
-export default function MeasurementForm({ isEdit, initial, onSubmit, submitAfterMode }: Props) {
+export default function MeasurementForm({
+  isEdit,
+  initial,
+  onSubmit,
+  submitAfterMode,
+  namePlaceholder = 'e.g. Ada — main costume',
+}: Props) {
   const form = useMeasurementForm()
   const [nameTouched, setNameTouched] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const { load } = form
   useEffect(() => {
-    if (initial) form.load(initial.name, initial.measurements)
-  }, [initial, form])
+    if (initial) load(initial.name, initial.measurements)
+  }, [initial, load])
 
   const nameError = nameTouched && !form.state.name.trim()
 
@@ -60,7 +68,7 @@ export default function MeasurementForm({ isEdit, initial, onSubmit, submitAfter
         <input
           type="text"
           className={`input input-bordered input-sm w-48 ${nameError ? 'input-error' : ''}`}
-          placeholder="e.g. Ada — main costume"
+          placeholder={namePlaceholder}
           value={form.state.name}
           onChange={(e) => form.setName(e.target.value)}
           onBlur={() => setNameTouched(true)}

@@ -64,13 +64,12 @@ export default function PatternRow({
           checked={isPurchased}
           onChange={() => onTogglePurchase(pattern, isPurchased ? 0 : 1)}
         />
-        <button
-          type="button"
+        <div
           className="w-12 h-12 flex-none rounded overflow-hidden bg-base-200 border border-base-300 cursor-pointer"
           onClick={() => (isUpload ? onOpenPreview(pattern) : setViewing(true))}
         >
           <PatternThumbnail pattern={pattern} />
-        </button>
+        </div>
         <span
           className={`flex-1 text-sm font-medium truncate min-w-0 ${
             isPurchased ? 'line-through' : ''

@@ -46,11 +46,11 @@ export default function PatternPurchaseModal({ pattern, onConfirm, onClose }: Pr
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <label className="form-control">
+          <div className="form-control">
             <span className="label-text font-medium">
               Price paid <span className="text-error">*</span>
             </span>
-            <span className="input input-bordered input-sm w-full flex items-center gap-2">
+            <label className="input input-bordered input-sm w-full flex items-center gap-2">
               <span className="text-base-content/40 text-sm select-none">$</span>
               <input
                 type="number"
@@ -63,8 +63,8 @@ export default function PatternPurchaseModal({ pattern, onConfirm, onClose }: Pr
                 required
                 autoFocus
               />
-            </span>
-          </label>
+            </label>
+          </div>
           <div className="flex justify-end gap-2 mt-1">
             <button type="button" className="btn btn-ghost btn-sm" onClick={onClose}>
               Cancel
