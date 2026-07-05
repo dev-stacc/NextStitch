@@ -3,6 +3,7 @@
 import { type FormEvent, useEffect, useState } from 'react'
 import { patternsApi, projectsApi } from '@/src/api'
 import type { MeasurementSet } from '@/src/models'
+import { useBlobUrl } from '@/src/lib/blob-url'
 import Alert from '@/src/components/ui/Alert'
 import Spinner from '@/src/components/ui/Spinner'
 
@@ -27,6 +28,7 @@ export default function GenerateSection({ projectId, onDone }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [generated, setGenerated] = useState<Generated | null>(null)
+  const pdfBlobUrl = useBlobUrl(generated?.pdf_url)
 
   useEffect(() => {
     projectsApi
@@ -152,9 +154,9 @@ export default function GenerateSection({ projectId, onDone }: Props) {
               Pattern saved to your project. Preview the PDF below.
             </p>
             <div className="h-64 md:flex-1 md:min-h-0 rounded overflow-hidden border border-base-300">
-              {generated.pdf_url && (
+              {pdfBlobUrl && (
                 <iframe
-                  src={generated.pdf_url}
+                  src={pdfBlobUrl}
                   className="w-full h-full"
                   title="Generated pattern preview"
                 />
