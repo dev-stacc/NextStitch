@@ -60,7 +60,9 @@ export default function ProgressPhotos({ projectId, initialImages }: Props) {
         />
       )}
       <div className="flex items-center justify-between mb-3 shrink-0">
-        <h2 className="text-lg font-medium">Progress photos</h2>
+        <h2 className="text-lg font-medium">
+          Progress photos{images.length > 0 && <span className="text-base-content/40 text-sm font-normal ml-2">({images.length})</span>}
+        </h2>
         <label className={`btn btn-primary btn-sm ${uploading ? 'btn-disabled' : ''}`}>
           {uploading ? <Spinner size="xs" /> : '+ Add'}
           <input
@@ -74,7 +76,7 @@ export default function ProgressPhotos({ projectId, initialImages }: Props) {
       </div>
       <div className="flex-1 min-h-0 flex items-stretch overflow-x-auto gap-3 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
         {images.length === 0 && !uploading && (
-          <p className="text-base-content/40 text-sm self-center">No progress photos yet.</p>
+          <p className="text-base-content/40 text-sm self-center justify-between">No progress photos yet.</p>
         )}
         {images.map((img, i) => (
           <div

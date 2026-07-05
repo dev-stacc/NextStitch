@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useBlobUrl } from '@/src/lib/blob-url'
 import Modal from '@/src/components/ui/Modal'
 
@@ -24,6 +24,17 @@ export default function PreviewModal({
   pagerText,
 }: Props) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    if (!onPrev && !onNext) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowLeft') onPrev?.()
+      if (e.key === 'ArrowRight') onNext?.()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onPrev, onNext])
+
   const isPDF = url.endsWith('.pdf') || url.startsWith('data:application/pdf')
   const isSVG = url.endsWith('.svg') || url.startsWith('data:image/svg')
   const iframeSrc = useBlobUrl(isPDF || isSVG ? url : null) ?? url
