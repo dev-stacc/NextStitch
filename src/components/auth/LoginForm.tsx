@@ -9,7 +9,8 @@ import Spinner from '@/src/components/ui/Spinner'
 export default function LoginForm() {
   const router = useRouter()
   const params = useSearchParams()
-  const callbackUrl = params.get('callbackUrl') ?? '/'
+  const raw = params.get('callbackUrl') ?? '/'
+  const callbackUrl = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
