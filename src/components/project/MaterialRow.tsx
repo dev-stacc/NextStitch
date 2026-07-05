@@ -5,7 +5,7 @@ import { Eye, Package } from 'lucide-react'
 import { materialsApi } from '@/src/api'
 import type { Material } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
-import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
+import PreviewModal from '@/src/components/project/PreviewModal'
 import { extractSourceUrl } from '@/src/lib/material-url'
 
 interface Props {
@@ -39,8 +39,10 @@ export default function MaterialRow({
   return (
     <>
       {viewingImage && material.image_url && (
-        <ImageViewerModal
-          images={[material.image_url]}
+        <PreviewModal
+          url={material.image_url}
+          title={material.name}
+          showPrint={false}
           onClose={() => setViewingImage(false)}
         />
       )}

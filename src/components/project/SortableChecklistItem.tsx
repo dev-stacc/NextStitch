@@ -6,7 +6,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { ChecklistItem } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
-import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
+import PreviewModal from '@/src/components/project/PreviewModal'
 
 interface Props {
   item: ChecklistItem
@@ -19,7 +19,7 @@ export default function SortableChecklistItem({ item, onCheckChange, onEdit, onD
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: item.id,
   })
-  const [viewing, setViewing] = useState(false)
+  const [viewingIdx, setViewingIdx] = useState<number | null>(null)
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -29,8 +29,15 @@ export default function SortableChecklistItem({ item, onCheckChange, onEdit, onD
 
   return (
     <>
-      {viewing && images.length > 0 && (
-        <ImageViewerModal images={images} onClose={() => setViewing(false)} />
+      {viewingIdx !== null && images[viewingIdx] && (
+        <PreviewModal
+          url={images[viewingIdx]}
+          showPrint={false}
+          onClose={() => setViewingIdx(null)}
+          onPrev={images.length > 1 ? () => setViewingIdx((i) => ((i ?? 0) - 1 + images.length) % images.length) : undefined}
+          onNext={images.length > 1 ? () => setViewingIdx((i) => ((i ?? 0) + 1) % images.length) : undefined}
+          pagerText={images.length > 1 ? `${viewingIdx + 1} / ${images.length}` : undefined}
+        />
       )}
       <li
         ref={setNodeRef}
@@ -58,7 +65,7 @@ export default function SortableChecklistItem({ item, onCheckChange, onEdit, onD
             src={images[0]}
             alt=""
             className="w-8 h-8 rounded object-cover shrink-0 cursor-pointer"
-            onClick={() => setViewing(true)}
+            onClick={() => setViewingIdx(0)}
           />
         )}
         <span

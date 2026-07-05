@@ -4,7 +4,7 @@ import { type ChangeEvent, useEffect, useState } from 'react'
 import { progressImagesApi } from '@/src/api'
 import type { ProjectImage } from '@/src/models'
 import DeleteButton from '@/src/components/ui/DeleteButton'
-import ImageViewerModal from '@/src/components/ui/ImageViewerModal'
+import PreviewModal from '@/src/components/project/PreviewModal'
 import Spinner from '@/src/components/ui/Spinner'
 import { compressImage } from '@/src/lib/image'
 
@@ -45,12 +45,19 @@ export default function ProgressPhotos({ projectId, initialImages }: Props) {
     setImages((prev) => prev.filter((i) => i.id !== imageId))
   }
 
-  const urls = images.map((img) => img.url)
+  const total = images.length
 
   return (
     <>
       {viewing !== null && (
-        <ImageViewerModal images={urls} startIndex={viewing} onClose={() => setViewing(null)} />
+        <PreviewModal
+          url={images[viewing].url}
+          showPrint={false}
+          onClose={() => setViewing(null)}
+          onPrev={total > 1 ? () => setViewing((i) => ((i ?? 0) - 1 + total) % total) : undefined}
+          onNext={total > 1 ? () => setViewing((i) => ((i ?? 0) + 1) % total) : undefined}
+          pagerText={total > 1 ? `${viewing + 1} / ${total}` : undefined}
+        />
       )}
       <div className="flex items-center justify-between mb-3 shrink-0">
         <h2 className="text-lg font-medium">Progress photos</h2>

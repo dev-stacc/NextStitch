@@ -170,7 +170,11 @@ export default function ProjectDetailPage() {
   return (
     <>
       {previewPattern && (
-        <PreviewModal pattern={previewPattern} onClose={() => setPreviewPattern(null)} />
+        <PreviewModal
+          url={previewPattern.url ?? ''}
+          title={previewPattern.title ?? previewPattern.pattern_number ?? 'Pattern'}
+          onClose={() => setPreviewPattern(null)}
+        />
       )}
       {previewMs && (
         <MeasurementSetModal ms={previewMs} onClose={() => setPreviewMs(null)} />
