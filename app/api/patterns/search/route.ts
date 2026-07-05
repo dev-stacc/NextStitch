@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { PatternSource } from '@/src/models'
 import { requireUser } from '@/src/server/auth-helpers'
-import { badRequest, json } from '@/src/server/http'
+import { badRequest, json, readJson } from '@/src/server/http'
 import { getPatternScraper } from '@/src/server/services/patterns'
 
 interface Body {
@@ -12,9 +12,10 @@ interface Body {
 export async function POST(req: NextRequest) {
   const userId = await requireUser()
   if (userId instanceof NextResponse) return userId
-
-  const body = (await req.json()) as Body
-  if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')
+    const parsed = await readJson<Body>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
+if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')
 
   const scraper = getPatternScraper(body.source)
   if (!scraper) return json([])

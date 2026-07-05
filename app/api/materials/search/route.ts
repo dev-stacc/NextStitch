@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireUser } from '@/src/server/auth-helpers'
-import { badRequest, json } from '@/src/server/http'
+import { badRequest, json, readJson } from '@/src/server/http'
 import { getMaterialScraper } from '@/src/server/services/materials'
 
 interface Body {
@@ -12,7 +12,9 @@ export async function POST(req: NextRequest) {
   const userId = await requireUser()
   if (userId instanceof NextResponse) return userId
 
-  const body = (await req.json()) as Body
+  const parsed = await readJson<Body>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
   if (!body?.query?.trim() || !body?.source) return badRequest('query and source required')
 
   const scraper = getMaterialScraper(body.source)

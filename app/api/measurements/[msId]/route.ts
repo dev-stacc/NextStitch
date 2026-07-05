@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import type { UpsertMeasurementSetInput } from '@/src/models'
 import { getStore } from '@/src/server/db'
 import { requireUser } from '@/src/server/auth-helpers'
-import { json, noContent, notFound, parseIntParam } from '@/src/server/http'
+import { json, noContent, notFound, parseIntParam, readJson } from '@/src/server/http'
 
 type Params = { params: Promise<{ msId: string }> }
 
@@ -12,8 +12,10 @@ export async function PATCH(req: NextRequest, ctx: Params) {
   const { msId } = await ctx.params
   const mid = parseIntParam(msId)
   if (mid == null) return notFound()
-  const body = (await req.json()) as UpsertMeasurementSetInput
-  const updated = await getStore().measurementSets.updateGlobal(userId, mid, body)
+    const parsed = await readJson<UpsertMeasurementSetInput>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
+const updated = await getStore().measurementSets.updateGlobal(userId, mid, body)
   if (!updated) return notFound()
   return json(updated)
 }

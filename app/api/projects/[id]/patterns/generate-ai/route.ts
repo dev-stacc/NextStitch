@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getStore } from '@/src/server/db'
 import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { badRequest, json, notFound } from '@/src/server/http'
+import { badRequest, json, notFound, readJson } from '@/src/server/http'
 import { generatePatternSpec, renderPatternPdf } from '@/src/server/services/pattern-gen'
 
 type Params = { params: Promise<{ id: string }> }
@@ -17,7 +17,9 @@ export async function POST(req: NextRequest, ctx: Params) {
   const access = await requireProjectAccess(id)
   if (access instanceof NextResponse) return access
 
-  const body = (await req.json()) as Body
+  const parsed = await readJson<Body>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
   if (!body?.prompt?.trim()) return badRequest('prompt is required')
 
   let spec, pdf

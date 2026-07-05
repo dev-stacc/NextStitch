@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStore } from '@/src/server/db'
 import { getCurrentUserId } from '@/src/server/auth-helpers'
-import { badRequest, json, notFound, unauthorized } from '@/src/server/http'
+import { badRequest, json, notFound, unauthorized, readJson } from '@/src/server/http'
 import { suggestPatterns } from '@/src/server/services/llm'
 
 interface Body {
@@ -11,8 +11,10 @@ interface Body {
 export async function POST(req: NextRequest) {
   const userId = await getCurrentUserId()
   if (!userId) return unauthorized()
-  const body = (await req.json()) as Body
-  if (typeof body?.project_id !== 'number') return badRequest('project_id required')
+    const parsed = await readJson<Body>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
+if (typeof body?.project_id !== 'number') return badRequest('project_id required')
   const project = await getStore().projects.get(userId, body.project_id)
   if (!project) return notFound()
   try {

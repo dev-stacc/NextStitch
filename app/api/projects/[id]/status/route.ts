@@ -3,7 +3,7 @@ import type { ProjectStatus } from '@/src/models'
 import { getStore } from '@/src/server/db'
 import { getCurrentUserId } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { badRequest, noContent, notFound, parseIntParam, unauthorized } from '@/src/server/http'
+import { badRequest, noContent, notFound, parseIntParam, readJson, unauthorized } from '@/src/server/http'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -15,7 +15,9 @@ export async function PATCH(req: NextRequest, ctx: Params) {
   const { id } = await ctx.params
   const projectId = parseIntParam(id)
   if (projectId == null) return notFound()
-  const body = (await req.json()) as { status?: string }
+  const parsed = await readJson<{ status?: string }>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
   const status = body?.status
   if (!status || !VALID.includes(status as ProjectStatus)) return badRequest('invalid status')
   const ok = await getStore().projects.setStatus(userId, projectId, status as ProjectStatus)

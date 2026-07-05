@@ -3,7 +3,7 @@ import type { UpdatePatternInput } from '@/src/models'
 import { getStore } from '@/src/server/db'
 import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { json, noContent, notFound, parseIntParam } from '@/src/server/http'
+import { json, noContent, notFound, parseIntParam, readJson } from '@/src/server/http'
 
 type Params = { params: Promise<{ id: string; patternId: string }> }
 
@@ -13,7 +13,9 @@ export async function PATCH(req: NextRequest, ctx: Params) {
   if (access instanceof NextResponse) return access
   const pid = parseIntParam(patternId)
   if (pid == null) return notFound()
-  const body = (await req.json()) as UpdatePatternInput
+  const parsed = await readJson<UpdatePatternInput>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
   const updated = await getStore().patterns.update(access.projectId, pid, body)
   if (!updated) return notFound()
   getEventBus().notify(access.projectId)

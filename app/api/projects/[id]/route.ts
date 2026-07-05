@@ -3,7 +3,7 @@ import type { UpdateProjectInput } from '@/src/models'
 import { getStore } from '@/src/server/db'
 import { getCurrentUserId } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
-import { json, noContent, notFound, parseIntParam, unauthorized } from '@/src/server/http'
+import { json, noContent, notFound, parseIntParam, readJson, unauthorized } from '@/src/server/http'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -24,8 +24,10 @@ export async function PATCH(req: NextRequest, ctx: Params) {
   const { id } = await ctx.params
   const projectId = parseIntParam(id)
   if (projectId == null) return notFound()
-  const body = (await req.json()) as UpdateProjectInput
-  const updated = await getStore().projects.update(userId, projectId, body)
+    const parsed = await readJson<UpdateProjectInput>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
+const updated = await getStore().projects.update(userId, projectId, body)
   if (!updated) return notFound()
   getEventBus().notify(projectId)
   return json(updated)

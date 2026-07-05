@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm'
 import bcrypt from 'bcryptjs'
 import { getDb } from '@/src/server/db/client'
 import { users } from '@/src/server/db/schema'
-import { badRequest, json } from '@/src/server/http'
+import { badRequest, json, readJson } from '@/src/server/http'
 
 interface Body {
   email?: string
@@ -15,7 +15,9 @@ const MIN_PASSWORD_LENGTH = 8
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(req: NextRequest) {
-  const body = (await req.json().catch(() => ({}))) as Body
+  const parsed = await readJson<Body>(req)
+  if (!parsed.ok) return parsed.res
+  const body = parsed.data
   const email = String(body.email ?? '').trim().toLowerCase()
   const password = String(body.password ?? '')
   const name = String(body.name ?? '').trim() || null
