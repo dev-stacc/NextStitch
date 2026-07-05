@@ -3,6 +3,7 @@ import { getStore } from '@/src/server/db'
 import { requireProjectAccess } from '@/src/server/auth-helpers'
 import { getEventBus } from '@/src/server/events'
 import { badRequest, json, notFound } from '@/src/server/http'
+import { generatePatternSpec, renderPatternPdf } from '@/src/server/services/pattern-gen'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -19,14 +20,19 @@ export async function POST(req: NextRequest, ctx: Params) {
   const body = (await req.json()) as Body
   if (!body?.prompt?.trim()) return badRequest('prompt is required')
 
-  // TODO(stub): replace with Claude-driven pattern generator + PDF renderer.
-  const pdfStub =
-    'data:application/pdf;base64,JVBERi0xLjQKJcOkw7zDtsOfCjEgMCBvYmoKPDwKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCnRyYWlsZXIKPDwKL1Jvb3QgMSAwIFIKPj4KJSVFT0Y='
+  let spec, pdf
+  try {
+    spec = await generatePatternSpec(body.prompt, body.measurements ?? {})
+    pdf = await renderPatternPdf(spec)
+  } catch (err) {
+    return NextResponse.json({ detail: (err as Error).message }, { status: 502 })
+  }
 
+  const dataUrl = `data:application/pdf;base64,${pdf.toString('base64')}`
   const pattern = await getStore().patterns.create(access.projectId, {
     source: 'generated',
-    title: `Generated: ${body.prompt.slice(0, 60)}`,
-    url: pdfStub,
+    title: spec.title || `Generated: ${body.prompt.slice(0, 60)}`,
+    url: dataUrl,
     image_url: null,
     price: null,
   })

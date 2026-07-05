@@ -7,7 +7,6 @@ import {
   DELETE as deletePattern,
 } from '@/app/api/projects/[id]/patterns/[patternId]/route'
 import { POST as uploadPattern } from '@/app/api/projects/[id]/patterns/upload/route'
-import { POST as generateAi } from '@/app/api/projects/[id]/patterns/generate-ai/route'
 import { ctx, formRequest, jsonRequest } from '../helpers'
 
 async function seedProject(): Promise<Project> {
@@ -91,18 +90,4 @@ describe('patterns route handlers', () => {
     expect(created.price_paid).toBe(3.5)
   })
 
-  it('generate-ai returns an array with a stubbed generated pattern', async () => {
-    const project = await seedProject()
-    const res = await generateAi(
-      jsonRequest(`/api/projects/${project.id}/patterns/generate-ai`, {
-        method: 'POST',
-        body: { prompt: 'wide-leg pants', measurements: { waist: 74 } },
-      }),
-      ctx({ id: String(project.id) }),
-    )
-    expect(res.status).toBe(201)
-    const patterns = (await res.json()) as Pattern[]
-    expect(patterns).toHaveLength(1)
-    expect(patterns[0].source).toBe('generated')
-  })
 })

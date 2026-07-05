@@ -1,11 +1,10 @@
 import { search, SafeSearchType } from 'duck-duck-scrape'
-import type { PatternSearchHit } from '@/src/models'
-import type { PatternScraper } from './types'
+import type { MaterialSearchHit } from '@/src/models'
+import type { MaterialScraper } from './types'
 
-// Storefront is JS-rendered Wix, so use DDG site: search for pattern URLs.
-const SITE = 'laughingmoonmercantile.com'
+const SITE = 'cleanersupply.ca'
 
-export const laughingMoonScraper: PatternScraper = {
+export const cleanersupplyScraper: MaterialScraper = {
   async search(query, maxResults = 10) {
     let results: Array<{ title?: string; url?: string }> = []
     try {
@@ -14,17 +13,16 @@ export const laughingMoonScraper: PatternScraper = {
     } catch {
       // DDG rate-limits automated queries; degrade to [].
     }
-    const hits: PatternSearchHit[] = []
+    const hits: MaterialSearchHit[] = []
     for (const r of results) {
       if (hits.length >= maxResults) break
       if (!r.url?.includes(SITE)) continue
       hits.push({
-        source: 'laughing_moon',
+        source: 'cleanersupply',
         title: r.title ?? '',
         url: r.url,
         image_url: null,
         price: null,
-        pattern_number: null,
       })
     }
     return hits
