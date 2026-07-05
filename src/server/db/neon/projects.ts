@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm'
+import { and, eq, inArray } from 'drizzle-orm'
 import type {
   CreateProjectInput,
   Project,
@@ -116,11 +116,17 @@ export class NeonProjects implements ProjectsRepo {
         budget: input.budget ?? null,
       })
       .returning()
-    const ids = input.global_measurement_set_ids ?? []
-    if (ids.length > 0) {
-      await this.db
-        .insert(projectGlobalMeasurementSets)
-        .values(ids.map((globalId: number) => ({ project_id: row.id, global_ms_id: globalId })))
+    const requestedIds = input.global_measurement_set_ids ?? []
+    if (requestedIds.length > 0) {
+      const owned = await this.db
+        .select({ id: globalMeasurementSets.id })
+        .from(globalMeasurementSets)
+        .where(and(eq(globalMeasurementSets.user_id, userId), inArray(globalMeasurementSets.id, requestedIds)))
+      if (owned.length > 0) {
+        await this.db
+          .insert(projectGlobalMeasurementSets)
+          .values(owned.map(({ id: globalId }) => ({ project_id: row.id, global_ms_id: globalId })))
+      }
     }
     return toProject(row, 0)
   }
