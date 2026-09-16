@@ -2,7 +2,7 @@
 
 **Live:** https://next-stitch-henna.vercel.app
 
-A personal sewing project planner. This is a full rewrite of [SewingAssistant](https://github.com/StacAttacc/SewingAssistant) — the original was a separate React (Vite) frontend and Python (FastAPI) backend. This version collapses it into a single Next.js 16 app for simpler deployment and adds multi-user support with proper auth.
+A personal sewing project planner. This is a full rewrite of [SewingAssistant](https://github.com/dev-stacc/SewingAssistant) — the original was a separate React (Vite) frontend and Python (FastAPI) backend. This version collapses it into a single Next.js 16 app for simpler deployment and adds multi-user support with proper auth.
 
 ## Features
 
